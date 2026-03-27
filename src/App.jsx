@@ -12,11 +12,11 @@ export default function App() {
       <Noise />
       <Spotlight />
       <FloatingSocials />
+      <ChatBot />
 
       <Navbar />
 
       <main>
-        <ChatBot />
         <HomePage />
       </main>
 
