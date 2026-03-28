@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { ScrollReveal } from "../ui/ScrollReveal.jsx";
 import BlurText from "../ui/BlurText.jsx";
+import { FIELDS } from "../../data/portfolio.js";
 
 
-const FIELDS = [
-  { key: "name",  label: "Name",  type: "text",  placeholder: "Your name"      },
-  { key: "email", label: "Email", type: "email", placeholder: "your@email.com" },
-];
+
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });

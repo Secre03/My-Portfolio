@@ -19,7 +19,8 @@ export default function Hero() {
         aria-hidden
         className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] pointer-events-none rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(168,255,87,0.055) 0%, transparent 70%)",
+          background:
+            "radial-gradient(circle, rgba(168,255,87,0.055) 0%, transparent 70%)",
           animation: "pulseGlow 4s ease-in-out infinite",
         }}
       />
@@ -35,8 +36,7 @@ export default function Hero() {
         style={{ animation: "spinSlow 36s linear infinite reverse" }}
       />
       <div className="relative z-10 text-center px-6">
-
-       <BlurText
+        <BlurText
           text="Mark John Milano"
           delay={200}
           animateBy="words"
@@ -45,18 +45,18 @@ export default function Hero() {
         />
 
         <div
-          className="my-5 mb-10" 
+          className="my-5 mb-10"
           style={{ animation: "fadeUp 0.8s ease 0.4s both" }}
         >
           <TrueFocus
-          sentence="Future-Developer Designer"
-          manualMode={false}
-          blurAmount={5}
-          borderColor="#14da3c"
-          animationDuration={0.8}
-          pauseBetweenAnimations={1}
-          wordClassName="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-[var(--text-muted)]"
-        />
+            sentence="Future-Developer Designer"
+            manualMode={false}
+            blurAmount={5}
+            borderColor="#14da3c"
+            animationDuration={0.8}
+            pauseBetweenAnimations={1}
+            wordClassName="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-[var(--text-muted)]"
+          />
         </div>
 
         <div style={{ animation: "float 4s ease-in-out infinite" }}>
@@ -64,7 +64,9 @@ export default function Hero() {
             src="/my-logo.png"
             alt="Logo watermark"
             className="w-[180px] mx-auto opacity-10 brightness-0 invert"
-            onError={e => { e.target.style.display = "none"; }}
+            onError={(e) => {
+              e.target.style.display = "none";
+            }}
           />
         </div>
       </div>

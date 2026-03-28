@@ -1,4 +1,3 @@
-// src/pages/index.jsx
 import Hero      from "../components/sections/Hero.jsx";
 import WhatIDo   from "../components/sections/WhatIDo.jsx";
 import Skills    from "../components/sections/Skills.jsx";

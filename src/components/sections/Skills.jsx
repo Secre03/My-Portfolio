@@ -3,34 +3,33 @@ import { ScrollReveal } from "../ui/ScrollReveal.jsx";
 import { SKILLS } from "../../data/portfolio.js";
 import BlurText from "../ui/BlurText.jsx";
 
-SKILLS[0].skills = SKILLS.slice(1).flatMap(c => c.skills);
+SKILLS[0].skills = SKILLS.slice(1).flatMap((c) => c.skills);
 
 export default function Skills() {
   const [active, setActive] = useState("all");
-  const skills = SKILLS.find(c => c.key === active);
+  const skills = SKILLS.find((c) => c.key === active);
 
   return (
     <section className="bg-[var(--bg)] py-24 px-6 sm:px-10">
       <div className="max-w-4xl mx-auto">
-
         <ScrollReveal>
           <div className="text-center mb-12">
             <p className="text-[0.68rem] tracking-[0.18em] uppercase text-[var(--accent)] font-bold mb-2">
               Expertise
             </p>
             <BlurText
-                text="Skills &amp; Tools"
-                delay={200}
-                animateBy="words"
-                direction="top"
-                className="text-3xl md:text-4xl lg:text-5xl font-black text-center justify-center mb-8"
-              />
+              text="Skills &amp; Tools"
+              delay={200}
+              animateBy="words"
+              direction="top"
+              className="text-3xl md:text-4xl lg:text-5xl font-black text-center justify-center mb-8"
+            />
           </div>
         </ScrollReveal>
 
         <ScrollReveal delay={100}>
           <div className="flex justify-center flex-wrap gap-2 mb-12">
-            {SKILLS.map(cat => {
+            {SKILLS.map((cat) => {
               const Icon = cat.icon;
               const isActive = active === cat.key;
               return (
@@ -61,7 +60,6 @@ export default function Skills() {
             <SkillCard key={skill.name} skill={skill} delay={i * 40} />
           ))}
         </div>
-
       </div>
     </section>
   );
@@ -84,17 +82,21 @@ function SkillCard({ skill, delay }) {
       ].join(" ")}
       style={{ animation: `fadeUp 0.5s ease ${delay}ms both` }}
     >
-      <div className={[
-        "w-[52px] h-[52px] flex items-center justify-center transition-transform duration-300",
-        hovered ? "scale-110" : "scale-100",
-      ].join(" ")}>
+      <div
+        className={[
+          "w-[52px] h-[52px] flex items-center justify-center transition-transform duration-300",
+          hovered ? "scale-110" : "scale-100",
+        ].join(" ")}
+      >
         {!imgError ? (
           <img
             src={skill.image}
             alt={skill.name}
             className={[
               "w-full h-full object-contain transition-all duration-300",
-              hovered ? "grayscale-0 brightness-100" : "grayscale brightness-75",
+              hovered
+                ? "grayscale-0 brightness-100"
+                : "grayscale brightness-75",
             ].join(" ")}
             onError={() => setImgError(true)}
           />
@@ -105,17 +107,21 @@ function SkillCard({ skill, delay }) {
         )}
       </div>
 
-      <span className={[
-        "text-[0.78rem] font-semibold text-center tracking-[0.01em] transition-colors duration-300",
-        hovered ? "text-[var(--accent)]" : "text-[var(--text-muted)]",
-      ].join(" ")}>
+      <span
+        className={[
+          "text-[0.78rem] font-semibold text-center tracking-[0.01em] transition-colors duration-300",
+          hovered ? "text-[var(--accent)]" : "text-[var(--text-muted)]",
+        ].join(" ")}
+      >
         {skill.name}
       </span>
 
-      <div className={[
-        "h-[2px] bg-[var(--accent)] rounded-full transition-all duration-300",
-        hovered ? "w-6" : "w-0",
-      ].join(" ")} />
+      <div
+        className={[
+          "h-[2px] bg-[var(--accent)] rounded-full transition-all duration-300",
+          hovered ? "w-6" : "w-0",
+        ].join(" ")}
+      />
     </div>
   );
 }

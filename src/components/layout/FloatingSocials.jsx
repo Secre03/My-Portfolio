@@ -32,7 +32,9 @@ export default function FloatingSocials() {
   return (
     <div
       className={`fixed right-6 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center transition-opacity duration-300 ${
-        visible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        visible
+          ? "opacity-100 pointer-events-auto"
+          : "opacity-0 pointer-events-none"
       }`}
     >
       <div className="w-px h-12 bg-gradient-to-b from-transparent to-white/20 mb-2" />
@@ -60,8 +62,10 @@ function SocialIcon({ href, label, icon }) {
       className="flex items-center justify-center w-9 h-9 my-1 rounded-lg transition-all duration-200 hover:-translate-x-1"
       style={{
         background: hov ? "rgba(20, 218, 60, 0.1)" : "transparent",
-        color:      hov ? "#14da3c" : "rgba(255,255,255,0.38)",
-        border:     hov ? "1px solid rgba(20,218,60,0.25)" : "1px solid transparent",
+        color: hov ? "#14da3c" : "rgba(255,255,255,0.38)",
+        border: hov
+          ? "1px solid rgba(20,218,60,0.25)"
+          : "1px solid transparent",
       }}
     >
       {icon}

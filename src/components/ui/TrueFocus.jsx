@@ -3,8 +3,8 @@ import { motion } from 'motion/react';
 
 const TrueFocus = ({
   sentence = 'True Focus',
-  wordClassName = '',          // ← add this
-  fontSize,                    // keep for backwards compat, but optional now
+  wordClassName = '',         
+  fontSize,                    
   fontWeight = 'bold',
   separator = ' ',
   manualMode = false,
@@ -74,10 +74,10 @@ const TrueFocus = ({
           <span
             key={index}
             ref={el => (wordRefs.current[index] = el)}
-            // ↓ swap hardcoded classes for the responsive className prop
+            //swap hardcoded classes for the responsive className prop
             className={`relative cursor-pointer ${wordClassName}`}
             style={{
-              fontSize: fontSize ?? undefined,   // only apply if explicitly passed
+              fontSize: fontSize ?? undefined,  
               fontWeight,
               filter: isActive ? `blur(0px)` : `blur(${blurAmount}px)`,
               '--border-color': borderColor,

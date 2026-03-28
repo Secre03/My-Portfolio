@@ -25,7 +25,6 @@ export default function Education() {
     <section className="bg-[var(--bg2)] py-20 sm:py-28 md:py-36 px-4 sm:px-8 md:px-10">
       <div className="max-w-5xl mx-auto">
 
-        {/* ── Header ── */}
         <ScrollReveal>
           <div className="mb-14 sm:mb-20 md:mb-24">
             <p className="text-[0.68rem] tracking-[0.18em] uppercase text-[var(--accent)] font-bold mb-2">
@@ -102,7 +101,6 @@ function EducationRow({ edu, isEven }) {
 
   const opacity = useSpring(scrollYProgress, { stiffness: 80, damping: 20 });
 
-  // On mobile, always slide from the right; on desktop alternate sides
   const xDesktop = useTransform(scrollYProgress, [0, 1], [isEven ? -60 : 60, 0]);
   const xMobile  = useTransform(scrollYProgress, [0, 1], [40, 0]);
 

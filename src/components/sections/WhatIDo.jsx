@@ -2,17 +2,9 @@ import { ScrollReveal } from "../ui/ScrollReveal.jsx";
 import TiltedCard from "../ui/TiltedCard.jsx";
 import MarkMilano from "/assets/Mark Milano.jpg";
 import BlurText from "../ui/BlurText.jsx";
+import { WHATIDO } from "../../data/portfolio.js";
 
-const CARDS = [
-  {
-    label: "DEVELOP",
-    desc: "I am a student who is currently learning how to build web applications using React, Tailwind CSS, and PHP. I am still improving my skills and continuously exploring new technologies to grow as a developer.",
-  },
-  {
-    label: "Design",
-    desc: "I am currently learning the basics of design and improving my creativity through practice. As a student, I am open to feedback and eager to explore new ideas to enhance my design skills.",
-  },
-];
+
 
 const QUOTE = "\u201cStrong foundations create limitless futures.\u201d";
 
@@ -33,10 +25,9 @@ export default function WhatIDo() {
         />
         </ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
-          {CARDS.map(({ label, desc }, i) => (
+          {WHATIDO.map(({ label, desc }, i) => (
             <ScrollReveal key={label} delay={i * 100}>
               <div className="relative overflow-hidden bg-[var(--card)] border border-[var(--border)] rounded-2xl p-9 h-full">
-                {/* Accent bar */}
                 <div className="absolute top-0 left-0 w-[3px] h-12 bg-[var(--accent)] rounded-br" />
                 <h3 className="text-[2rem] font-black tracking-tight text-[var(--text)] mb-4">
                   {label}

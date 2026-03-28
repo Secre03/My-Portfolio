@@ -77,7 +77,7 @@ export default function ChatBot() {
         )}
       </button>
 
-      {/* ── Chat panel ── */}
+      {/* chat panel */}
       <div
         className="fixed z-[199] flex flex-col overflow-hidden transition-all duration-300"
         style={{

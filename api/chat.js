@@ -43,27 +43,27 @@ PROJECTS:
 PERSONAL:
 - Favorite color: Black
 - Hobbies: Playing games, watching anime, reading manga
-- Favorite games: Mobile Legends
+- Favorite coffe: Caramel Machiato
 
 Only answer questions related to Mark's portfolio, skills, projects, background, or how to contact him.
 If asked something unrelated, politely redirect back to portfolio topics.`;
 
   try {
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method:  "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
-        "Content-Type":  "application/json",
+    const response = await fetch(
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "llama-3.1-8b-instant",
+          messages: [{ role: "system", content: SYSTEM }, ...messages],
+          max_tokens: 300,
+        }),
       },
-      body: JSON.stringify({
-        model:    "llama-3.1-8b-instant",
-        messages: [
-          { role: "system", content: SYSTEM },
-          ...messages,
-        ],
-        max_tokens: 300,
-      }),
-    });
+    );
 
     const data = await response.json();
     console.log("Groq response:", JSON.stringify(data, null, 2));
@@ -73,7 +73,9 @@ If asked something unrelated, politely redirect back to portfolio topics.`;
       return res.status(500).json({ reply: `Error: ${data.error.message}` });
     }
 
-    const reply = data.choices?.[0]?.message?.content ?? "Sorry, I couldn't get a response.";
+    const reply =
+      data.choices?.[0]?.message?.content ??
+      "Sorry, I couldn't get a response.";
     res.status(200).json({ reply });
   } catch (err) {
     console.error("Fetch error:", err);

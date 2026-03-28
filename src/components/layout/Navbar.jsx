@@ -1,9 +1,8 @@
-// ─── components/layout/Navbar.jsx ────────────────────────────────────────────
 import { useState, useEffect } from "react";
 
 const NAV_LINKS = [
-  ["home",    "Home"],
-  ["about",   "About"],
+  ["home", "Home"],
+  ["about", "About"],
   ["contact", "Contact"],
 ];
 
@@ -12,7 +11,7 @@ const scrollTo = (id) =>
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [active,   setActive]   = useState("home");
+  const [active, setActive] = useState("home");
 
   useEffect(() => {
     const onScroll = () => {
@@ -44,7 +43,6 @@ export default function Navbar() {
           : "bg-transparent border-b border-transparent"
       }`}
     >
-      {/* Logo */}
       <button
         onClick={() => handleNav("home")}
         className="bg-none border-none cursor-pointer flex items-center"
@@ -57,7 +55,6 @@ export default function Navbar() {
         />
       </button>
 
-      {/* Links */}
       <div className="flex gap-9">
         {NAV_LINKS.map(([id, label]) => (
           <button
