@@ -24,52 +24,55 @@ export default function Education() {
   return (
     <section className="bg-[var(--bg2)] py-20 sm:py-28 md:py-36 px-4 sm:px-8 md:px-10">
       <div className="max-w-5xl mx-auto">
-
         <ScrollReveal>
           <div className="mb-14 sm:mb-20 md:mb-24">
             <p className="text-[0.68rem] tracking-[0.18em] uppercase text-[var(--accent)] font-bold mb-2">
               Background
             </p>
             <BlurText
-            text="Educational Background"
-            delay={200}
-            animateBy="words"
-            direction="top"
-            className="text-4xl md:text-5xl lg:text-6xl font-black mb-8"
-        />
+              text="Educational Background"
+              delay={200}
+              animateBy="words"
+              direction="top"
+              className="text-4xl md:text-5xl lg:text-6xl font-black mb-8"
+            />
           </div>
         </ScrollReveal>
 
         <div ref={lineRef} className="relative">
-
-          <div className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-white/[0.06] hidden md:block" />
+          <div className="absolute left-1/2 top-0 bottom-0 w-[3px] -translate-x-1/2 bg-white/[0.06] hidden md:block rounded-full" />
 
           <motion.div
-            className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 origin-top hidden md:block"
+            className="absolute left-1/2 top-0 bottom-0 w-[3px] -translate-x-1/2 origin-top hidden md:block rounded-full"
             style={{
               scaleY,
-              background: "linear-gradient(to bottom, var(--accent), rgba(168,255,87,0.12))",
+              background:
+                "linear-gradient(to bottom, var(--accent), rgba(168,255,87,0.15))",
+              boxShadow: "0 0 6px 1px rgba(168,255,87,0.18)",
             }}
           />
 
           <motion.div
-            className="absolute hidden md:block w-3.5 h-3.5 rounded-full z-20"
+            className="absolute hidden md:block w-4 h-4 rounded-full z-20"
             style={{
               top: dotTop,
               left: "50%",
-              marginLeft: "-7px",
-              marginTop: "-7px",
+              marginLeft: "-8px",
+              marginTop: "-8px",
               background: "var(--accent)",
-              boxShadow: "0 0 14px 5px rgba(168,255,87,0.55)",
+              boxShadow: "0 0 8px 3px rgba(168,255,87,0.3)",
             }}
           />
 
-          <div className="absolute left-4 top-0 bottom-0 w-px bg-white/[0.06] block md:hidden" />
+          <div className="absolute left-4 top-0 bottom-0 w-[2px] bg-white/[0.06] block md:hidden rounded-full" />
+
           <motion.div
-            className="absolute left-4 top-0 bottom-0 w-px origin-top block md:hidden"
+            className="absolute left-4 top-0 bottom-0 w-[2px] origin-top block md:hidden rounded-full"
             style={{
               scaleY,
-              background: "linear-gradient(to bottom, var(--accent), rgba(168,255,87,0.12))",
+              background:
+                "linear-gradient(to bottom, var(--accent), rgba(168,255,87,0.12))",
+              boxShadow: "0 0 4px 1px rgba(168,255,87,0.15)",
             }}
           />
 
@@ -83,13 +86,11 @@ export default function Education() {
               />
             ))}
           </div>
-
         </div>
       </div>
     </section>
   );
 }
-
 
 function EducationRow({ edu, isEven }) {
   const rowRef = useRef(null);
@@ -101,15 +102,15 @@ function EducationRow({ edu, isEven }) {
 
   const opacity = useSpring(scrollYProgress, { stiffness: 80, damping: 20 });
 
-  const xDesktop = useTransform(scrollYProgress, [0, 1], [isEven ? -60 : 60, 0]);
-  const xMobile  = useTransform(scrollYProgress, [0, 1], [40, 0]);
+  const xDesktop = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [isEven ? -60 : 60, 0],
+  );
+  const xMobile = useTransform(scrollYProgress, [0, 1], [40, 0]);
 
   return (
-    <motion.div
-      ref={rowRef}
-      style={{ opacity }}
-      className="relative"
-    >
+    <motion.div ref={rowRef} style={{ opacity }} className="relative">
       <motion.div
         style={{ x: xMobile }}
         className="flex flex-col gap-4 pl-10 md:hidden"
@@ -128,12 +129,24 @@ function EducationRow({ edu, isEven }) {
           <div className="w-3 h-3 rounded-full bg-[var(--accent)] ring-[3px] ring-[var(--bg2)] shadow-[0_0_8px_3px_rgba(168,255,87,0.35)]" />
         </div>
 
-        <div className={`flex flex-col gap-2 ${isEven ? "md:items-end md:text-right" : "md:order-2 md:items-start md:text-left"}`}>
-          {isEven ? <InfoBlock edu={edu} align="right" /> : <DescBlock edu={edu} align="left" />}
+        <div
+          className={`flex flex-col gap-2 ${isEven ? "md:items-end md:text-right" : "md:order-2 md:items-start md:text-left"}`}
+        >
+          {isEven ? (
+            <InfoBlock edu={edu} align="right" />
+          ) : (
+            <DescBlock edu={edu} align="left" />
+          )}
         </div>
 
-        <div className={`flex flex-col gap-2 ${isEven ? "md:items-start md:text-left" : "md:order-1 md:items-end md:text-right"}`}>
-          {isEven ? <DescBlock edu={edu} align="left" /> : <InfoBlock edu={edu} align="left" />}
+        <div
+          className={`flex flex-col gap-2 ${isEven ? "md:items-start md:text-left" : "md:order-1 md:items-end md:text-right"}`}
+        >
+          {isEven ? (
+            <DescBlock edu={edu} align="left" />
+          ) : (
+            <InfoBlock edu={edu} align="left" />
+          )}
         </div>
       </motion.div>
     </motion.div>
@@ -143,12 +156,12 @@ function EducationRow({ edu, isEven }) {
 function MobileInfoBlock({ edu }) {
   return (
     <div className="flex items-center gap-3">
-      <div className="w-12 h-12 rounded-full overflow-hidden border border-white/10 bg-white/5 flex items-center justify-center flex-shrink-0">
+      <div className="w-16 h-16 rounded-full overflow-hidden border border-white/10 bg-white/5 flex items-center justify-center flex-shrink-0">
         <img
           src={edu.logo}
           alt={edu.school}
           className="w-full h-full object-cover"
-          onError={e => {
+          onError={(e) => {
             e.target.style.display = "none";
             e.target.parentNode.innerHTML = `
               <span style="font-size:0.9rem;font-weight:900;color:var(--accent);letter-spacing:-0.03em">
@@ -162,7 +175,9 @@ function MobileInfoBlock({ edu }) {
           {edu.school}
         </h3>
         {edu.address && (
-          <p className="text-xs font-semibold text-[var(--accent)]">{edu.address}</p>
+          <p className="text-xs font-semibold text-[var(--accent)]">
+            {edu.address}
+          </p>
         )}
         <span className="text-[0.65rem] font-medium text-[var(--text-muted)] tracking-[0.25em] uppercase">
           {edu.year}
@@ -174,7 +189,7 @@ function MobileInfoBlock({ edu }) {
 
 function MobileDescBlock({ edu }) {
   return (
-    <div className="relative rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-4 text-[var(--text-muted)] text-sm leading-relaxed">
+    <div className="relative rounded-xl border border-[var(--border)] bg-[var(--card)] px-5 py-5 text-[var(--text-muted)] text-[0.9rem] leading-relaxed">
       <div className="absolute top-0 left-4 h-[2px] w-8 bg-[var(--accent)] rounded-full" />
       <p className="mt-1">{edu.desc}</p>
     </div>
@@ -184,13 +199,15 @@ function MobileDescBlock({ edu }) {
 function InfoBlock({ edu, align }) {
   const right = align === "right";
   return (
-    <div className={`flex flex-col gap-2 ${right ? "items-end text-right" : "items-start text-left"}`}>
-      <div className="w-20 h-20 rounded-full overflow-hidden border border-white/10 bg-white/5 flex items-center justify-center mb-2">
+    <div
+      className={`flex flex-col gap-2 ${right ? "items-end text-right" : "items-start text-left"}`}
+    >
+      <div className="w-28 h-28 rounded-full overflow-hidden border border-white/10 bg-white/5 flex items-center justify-center mb-2">
         <img
           src={edu.logo}
           alt={edu.school}
           className="w-full h-full object-cover"
-          onError={e => {
+          onError={(e) => {
             e.target.style.display = "none";
             e.target.parentNode.innerHTML = `
               <span style="font-size:1.1rem;font-weight:900;color:var(--accent);letter-spacing:-0.03em">
@@ -203,7 +220,9 @@ function InfoBlock({ edu, align }) {
         {edu.school}
       </h3>
       {edu.address && (
-        <p className="text-sm font-semibold text-[var(--accent)]">{edu.address}</p>
+        <p className="text-sm font-semibold text-[var(--accent)]">
+          {edu.address}
+        </p>
       )}
       <span className="text-xs font-medium text-[var(--text-muted)] tracking-[0.3em] uppercase">
         {edu.year}
@@ -215,12 +234,16 @@ function InfoBlock({ edu, align }) {
 function DescBlock({ edu, align }) {
   const right = align === "right";
   return (
-    <div className={[
-      "relative rounded-2xl border border-[var(--border)] bg-[var(--card)] px-6 py-6",
-      "text-[var(--text-muted)] text-sm leading-relaxed",
-      right ? "text-right" : "text-left",
-    ].join(" ")}>
-      <div className={`absolute top-0 h-[2px] w-10 bg-[var(--accent)] rounded-full ${right ? "right-6" : "left-6"}`} />
+    <div
+      className={[
+        "relative rounded-2xl border border-[var(--border)] bg-[var(--card)] px-8 py-8",
+        "text-[var(--text-muted)] text-[0.95rem] leading-relaxed",
+        right ? "text-right" : "text-left",
+      ].join(" ")}
+    >
+      <div
+        className={`absolute top-0 h-[2px] w-10 bg-[var(--accent)] rounded-full ${right ? "right-6" : "left-6"}`}
+      />
       <p className="mt-1">{edu.desc}</p>
     </div>
   );

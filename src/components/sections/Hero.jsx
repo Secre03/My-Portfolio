@@ -33,7 +33,7 @@ export default function Hero() {
           delay={200}
           animateBy="words"
           direction="top"
-          className="text-[clamp(2rem,8vw,5rem)] font-black text-center justify-center mb-6 sm:mb-8 leading-tight"
+          className="text-[clamp(2rem,8vw,7rem)] font-black text-center justify-center mb-6 sm:mb-8 leading-tight"
         />
 
         <div

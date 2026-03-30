@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { ScrollReveal } from "../ui/ScrollReveal.jsx";
 import { PROJECTS } from "../../data/portfolio";
@@ -6,43 +6,9 @@ import BlurText from "../ui/BlurText.jsx";
 
 export default function Projects() {
   const [hovered, setHovered] = useState(null);
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const [isMobile, setIsMobile] = useState(false);
-
-  const onMove = useCallback(
-    (e) => setMouse({ x: e.clientX, y: e.clientY }),
-    [],
-  );
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 640);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  useEffect(() => {
-    if (isMobile) return;
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
-  }, [onMove, isMobile]);
 
   return (
     <section className="relative bg-[var(--bg)] px-4 sm:px-6 md:px-10 py-16 sm:py-20 md:py-24 overflow-x-hidden">
-      {!isMobile && hovered !== null && (
-        <div
-          aria-hidden
-          className="fixed z-[200] pointer-events-none w-[270px] h-[170px] rounded-xl overflow-hidden border border-[var(--border)] shadow-[0_24px_64px_rgba(0,0,0,0.75)] animate-[fadeIn_0.18s_ease]"
-          style={{ top: mouse.y + 18, left: mouse.x + 18 }}
-        >
-          <img
-            src={PROJECTS[hovered].img}
-            alt=""
-            className="w-full h-full object-cover"
-          />
-        </div>
-      )}
-
       <div className="max-w-[1100px] mx-auto">
         <ScrollReveal>
           <p className="text-[0.68rem] tracking-[0.18em] uppercase text-[var(--accent)] font-bold mb-7">
@@ -53,101 +19,99 @@ export default function Projects() {
             delay={200}
             animateBy="words"
             direction="top"
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-8"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-10"
           />
         </ScrollReveal>
 
-        <div className="border-t border-[var(--border)]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {PROJECTS.map((p, i) => {
             const isHov = hovered === i;
             return (
-              <ScrollReveal key={i} delay={i * 45}>
+              <ScrollReveal key={i} delay={i * 60}>
                 <div
-                  onMouseEnter={() => !isMobile && setHovered(i)}
-                  onMouseLeave={() => !isMobile && setHovered(null)}
-                  className={`border-b border-[var(--border)] py-5 sm:py-6 flex items-start sm:items-center gap-3 sm:gap-6 cursor-pointer transition-all duration-300 ${
-                    isHov ? "pl-3" : "pl-0"
-                  }`}
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
+                  className="group relative rounded-2xl overflow-hidden border border-[var(--border)] bg-[var(--bg-card,rgba(255,255,255,0.03))] cursor-pointer transition-all duration-300 hover:border-[var(--accent)] hover:shadow-[0_0_0_1px_var(--accent),0_16px_48px_rgba(0,0,0,0.5)]"
                 >
-                  <span
-                    className={`text-[clamp(1.5rem,5vw,3.5rem)] font-black leading-none transition-colors duration-300 min-w-[44px] sm:min-w-[70px] tabular-nums pt-[2px] ${
-                      isHov ? "text-[var(--accent)]" : "text-[var(--text-dim)]"
-                    }`}
-                  >
-                    {p.num}
-                  </span>
+                  <div className="relative w-full h-[190px] overflow-hidden">
+                    <img
+                      src={p.img}
+                      alt={p.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div
+                      className={`absolute inset-0 transition-opacity duration-300 bg-gradient-to-t from-[var(--bg)] via-[rgba(0,0,0,0.35)] to-transparent ${
+                        isHov ? "opacity-80" : "opacity-60"
+                      }`}
+                    />
 
-                  <div className="flex-1 min-w-0">
+                    <span
+                      className={`absolute top-3 left-3 text-[0.7rem] font-black tabular-nums px-2 py-0.5 rounded-full border transition-all duration-300 ${
+                        isHov
+                          ? "border-[var(--accent)] text-[var(--accent)] bg-[rgba(168,255,87,0.1)]"
+                          : "border-[var(--border)] text-[var(--text-dim)] bg-[rgba(0,0,0,0.4)]"
+                      }`}
+                    >
+                      {p.num}
+                    </span>
+                    <a
+                      href={p.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className={`absolute top-3 right-3 w-[32px] h-[32px] rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                        isHov
+                          ? "border-[var(--accent)] text-[var(--accent)] bg-[rgba(168,255,87,0.1)] scale-110"
+                          : "border-[var(--border)] text-[var(--text-dim)] bg-[rgba(0,0,0,0.4)]"
+                      }`}
+                    >
+                      <ArrowUpRight size={14} />
+                    </a>
+                  </div>
+
+                  <div className="px-4 py-4">
+                    <div className="flex gap-[0.4rem] items-center mb-3">
+                      {p.techIcons.map((icon) => (
+                        <img
+                          key={icon}
+                          src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${icon}/${icon}-original.svg`}
+                          alt={icon}
+                          className={`w-[18px] h-[18px] object-contain transition-all duration-300 ${
+                            isHov ? "opacity-90" : "opacity-30 brightness-0 invert"
+                          }`}
+                          onError={(e) => {
+                            e.target.style.display = "none";
+                          }}
+                        />
+                      ))}
+                    </div>
+
                     <h3
-                      className={`text-[clamp(0.9rem,2.5vw,1.25rem)] font-bold tracking-[-0.01em] mb-1 transition-colors duration-300 ${
+                      className={`text-[1rem] font-bold tracking-[-0.01em] mb-0.5 transition-colors duration-300 ${
                         isHov ? "text-[var(--text)]" : "text-[var(--text-muted)]"
                       }`}
                     >
                       {p.title}
                     </h3>
-                    <p className="text-[0.72rem] text-[var(--text-dim)] font-medium mb-2">
+                    <p className="text-[0.7rem] text-[var(--text-dim)] font-medium mb-3">
                       {p.role}
                     </p>
 
-                    <div className="flex gap-[0.35rem] flex-wrap sm:hidden">
+                    <div className="flex gap-[0.3rem] flex-wrap">
                       {p.stack.map((s) => (
                         <span
                           key={s}
-                          className="px-[0.55rem] py-[0.18rem] rounded-full text-[0.65rem] font-medium border bg-transparent border-[var(--border)] text-[var(--text-dim)]"
+                          className={`px-[0.5rem] py-[0.15rem] rounded-full text-[0.63rem] font-medium transition-all duration-300 border ${
+                            isHov
+                              ? "bg-[rgba(168,255,87,0.08)] border-[rgba(168,255,87,0.25)] text-[var(--accent)]"
+                              : "bg-transparent border-[var(--border)] text-[var(--text-dim)]"
+                          }`}
                         >
                           {s}
                         </span>
                       ))}
                     </div>
                   </div>
-
-                  <div className="hidden sm:flex gap-[0.45rem] items-center flex-wrap">
-                    {p.techIcons.map((icon) => (
-                      <img
-                        key={icon}
-                        src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${icon}/${icon}-original.svg`}
-                        alt={icon}
-                        className={`w-5 h-5 object-contain transition-all duration-300 ${
-                          isHov ? "opacity-90" : "opacity-25 brightness-0 invert"
-                        }`}
-                        onError={(e) => { e.target.style.display = "none"; }}
-                      />
-                    ))}
-                  </div>
-
-                  <div className="hidden sm:flex gap-[0.35rem] flex-wrap max-w-[180px]">
-                    {p.stack.map((s) => (
-                      <span
-                        key={s}
-                        className={`px-[0.55rem] py-[0.18rem] rounded-full text-[0.67rem] font-medium transition-all duration-300 border ${
-                          isHov
-                            ? "bg-[rgba(168,255,87,0.08)] border-[rgba(168,255,87,0.25)] text-[var(--accent)]"
-                            : "bg-transparent border-[var(--border)] text-[var(--text-dim)]"
-                        }`}
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-
-                  <a
-                    href={p.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className={`w-[34px] h-[34px] rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300 self-center ${
-                      isHov
-                        ? "border-[var(--accent)] text-[var(--accent)]"
-                        : "border-[var(--border)] text-[var(--text-dim)]"
-                    }`}
-                  >
-                    <ArrowUpRight
-                      size={16}
-                      className={`transition-transform duration-300 ${
-                        isHov ? "scale-110" : "scale-100"
-                      }`}
-                    />
-                  </a>
                 </div>
               </ScrollReveal>
             );

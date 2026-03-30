@@ -21,6 +21,7 @@ ROLE: Information Technology student & web developer
 EMAIL: markmilano112@gmail.com
 GITHUB: https://github.com/Secre03
 PHONE NUMBER: 09636397456
+ADDRESS: Daraga, Albay
 
 EDUCATION:
 - Busay Elementary School (2011–2016), Busay, Daraga, Albay
