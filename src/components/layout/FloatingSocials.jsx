@@ -36,13 +36,24 @@ export default function FloatingSocials() {
           : "opacity-0 pointer-events-none"
       }`}
     >
-      <div className="w-px h-12 bg-gradient-to-b from-transparent to-white/20 mb-2" />
+      <div
+        className="w-px h-12 mb-2"
+        style={{
+          background:
+            "linear-gradient(to bottom, transparent, var(--text-dim))",
+        }}
+      />
 
       {SOCIAL_LINKS.map(({ href, label }) => (
         <SocialIcon key={label} href={href} label={label} icon={Icons[label]} />
       ))}
 
-      <div className="w-px h-12 bg-gradient-to-t from-transparent to-white/20 mt-2" />
+      <div
+        className="w-px h-12 mt-2"
+        style={{
+          background: "linear-gradient(to top, transparent, var(--text-dim))",
+        }}
+      />
     </div>
   );
 }
@@ -60,11 +71,9 @@ function SocialIcon({ href, label, icon }) {
       onMouseLeave={() => setHov(false)}
       className="flex items-center justify-center w-9 h-9 my-1 rounded-lg transition-all duration-200 hover:-translate-x-1"
       style={{
-        background: hov ? "rgba(20, 218, 60, 0.1)" : "transparent",
-        color: hov ? "#14da3c" : "rgba(255,255,255,0.38)",
-        border: hov
-          ? "1px solid rgba(20,218,60,0.25)"
-          : "1px solid transparent",
+        background: hov ? "var(--accent-glow)" : "transparent",
+        color: hov ? "var(--accent)" : "var(--text-dim)",
+        border: hov ? "1px solid var(--accent)" : "1px solid transparent",
       }}
     >
       {icon}
