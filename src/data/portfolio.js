@@ -53,15 +53,6 @@ export const EDUCATION = [
 export const PROJECTS = [
   {
     num: "01",
-    title: "Task Management System",
-    role: "Website",
-    stack: ["React", "Tailwind CSS", "PHP", "MySQL"],
-    techIcons: ["react", "tailwindcss", "php", "mysql"],
-    img: "",
-    href: "#",
-  },
-  {
-    num: "02",
     title: "Path Finder",
     role: "GUI Application",
     stack: ["Python"],
@@ -70,16 +61,16 @@ export const PROJECTS = [
     href: "#",
   },
   {
-    num: "03",
+    num: "02",
     title: "Simple-Ecommerce",
     role: "Website",
     stack: ["HTML", "CSS", "Javascript", "Bootstrap"],
     techIcons: ["html5", "css3", "javascript", "bootstrap"],
-    img: "https://lauv-portfolio.vercel.app/_next/image?url=%2Fproj%2FprojectThree.png&w=1080&q=75",
-    href: "#",
+    img: "/assets/projects/Simple-ecommerce.png",
+    href: "https://simple-ecommerce-3lap.vercel.app/",
   },
   {
-    num: "04",
+    num: "03",
     title: "JMJ-Gadgets",
     role: "Website",
     stack: ["React", "Tailwind", "PHP", "MySQL", "Python"],
@@ -88,7 +79,7 @@ export const PROJECTS = [
     href: "https://github.com/Secre03/JMJ-Gadgets",
   },
   {
-    num: "05",
+    num: "04",
     title: "Zalora clone UI",
     role: "Design",
     stack: ["Figma"],

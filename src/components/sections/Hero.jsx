@@ -1,10 +1,9 @@
-// src/components/sections/Hero.jsx
 import BlurText from "../ui/BlurText.jsx";
 import TrueFocus from "../ui/TrueFocus.jsx";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[var(--bg)] pt-20">
+    <section className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden bg-[var(--bg)] px-4 pt-16 sm:pt-20">
       <div
         aria-hidden
         className="absolute inset-0 z-0 pointer-events-none"
@@ -12,40 +11,33 @@ export default function Hero() {
           backgroundImage:
             "linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px)," +
             "linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px)",
-          backgroundSize: "64px 64px",
+          backgroundSize: "clamp(32px, 5vw, 64px) clamp(32px, 5vw, 64px)",
         }}
       />
+
       <div
         aria-hidden
-        className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] pointer-events-none rounded-full"
+        className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none rounded-full"
         style={{
+          width: "clamp(280px, 60vw, 650px)",
+          height: "clamp(280px, 60vw, 650px)",
           background:
             "radial-gradient(circle, rgba(168,255,87,0.055) 0%, transparent 70%)",
           animation: "pulseGlow 4s ease-in-out infinite",
         }}
       />
 
-      <div
-        aria-hidden
-        className="absolute w-[480px] h-[480px] rounded-full border border-white/[0.10]"
-        style={{ animation: "spinSlow 24s linear infinite" }}
-      />
-      <div
-        aria-hidden
-        className="absolute w-[700px] h-[700px] rounded-full border border-white/[0.12]"
-        style={{ animation: "spinSlow 36s linear infinite reverse" }}
-      />
-      <div className="relative z-10 text-center px-6">
+      <div className="relative z-10 text-center w-full max-w-5xl mx-auto">
         <BlurText
           text="Mark John Milano"
           delay={200}
           animateBy="words"
           direction="top"
-          className="text-4xl md:text-6xl lg:text-7xl font-black text-center justify-center mb-8"
+          className="text-[clamp(2rem,8vw,5rem)] font-black text-center justify-center mb-6 sm:mb-8 leading-tight"
         />
 
         <div
-          className="my-5 mb-10"
+          className="my-4 mb-8 sm:my-5 sm:mb-10"
           style={{ animation: "fadeUp 0.8s ease 0.4s both" }}
         >
           <TrueFocus
@@ -55,7 +47,7 @@ export default function Hero() {
             borderColor="#14da3c"
             animationDuration={0.8}
             pauseBetweenAnimations={1}
-            wordClassName="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-[var(--text-muted)]"
+            wordClassName="text-[clamp(1rem,3.5vw,2.25rem)] font-light text-[var(--text-muted)]"
           />
         </div>
 
@@ -63,7 +55,7 @@ export default function Hero() {
           <img
             src="/my-logo.png"
             alt="Logo watermark"
-            className="w-[180px] mx-auto opacity-10 brightness-0 invert"
+            className="w-[clamp(100px,18vw,180px)] mx-auto opacity-10 brightness-0 invert"
             onError={(e) => {
               e.target.style.display = "none";
             }}

@@ -6,6 +6,7 @@ import BlurText from "../ui/BlurText.jsx";
 export default function Projects() {
   const [hovered, setHovered] = useState(null);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
 
   const onMove = useCallback(
     (e) => setMouse({ x: e.clientX, y: e.clientY }),
@@ -13,13 +14,21 @@ export default function Projects() {
   );
 
   useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
     window.addEventListener("mousemove", onMove);
     return () => window.removeEventListener("mousemove", onMove);
-  }, [onMove]);
+  }, [onMove, isMobile]);
 
   return (
-    <section className="relative bg-[var(--bg)] px-10 py-24">
-      {hovered !== null && (
+    <section className="relative bg-[var(--bg)] px-4 sm:px-6 md:px-10 py-16 sm:py-20 md:py-24 overflow-x-hidden">
+      {!isMobile && hovered !== null && (
         <div
           aria-hidden
           className="fixed z-[200] pointer-events-none w-[270px] h-[170px] rounded-xl overflow-hidden border border-[var(--border)] shadow-[0_24px_64px_rgba(0,0,0,0.75)] animate-[fadeIn_0.18s_ease]"
@@ -43,7 +52,7 @@ export default function Projects() {
             delay={200}
             animateBy="words"
             direction="top"
-            className="text-4xl md:text-5xl lg:text-6xl font-black mb-8"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-8"
           />
         </ScrollReveal>
 
@@ -53,56 +62,59 @@ export default function Projects() {
             return (
               <ScrollReveal key={i} delay={i * 45}>
                 <div
-                  onMouseEnter={() => setHovered(i)}
-                  onMouseLeave={() => setHovered(null)}
-                  className={`border-b border-[var(--border)] py-6 flex items-center gap-6 cursor-pointer transition-all duration-300 ${
+                  onMouseEnter={() => !isMobile && setHovered(i)}
+                  onMouseLeave={() => !isMobile && setHovered(null)}
+                  className={`border-b border-[var(--border)] py-5 sm:py-6 flex items-start sm:items-center gap-3 sm:gap-6 cursor-pointer transition-all duration-300 ${
                     isHov ? "pl-3" : "pl-0"
                   }`}
                 >
                   <span
-                    className={`text-[clamp(2rem,4vw,3.5rem)] font-black leading-none transition-colors duration-300 min-w-[70px] tabular-nums ${
+                    className={`text-[clamp(1.5rem,5vw,3.5rem)] font-black leading-none transition-colors duration-300 min-w-[44px] sm:min-w-[70px] tabular-nums pt-[2px] ${
                       isHov ? "text-[var(--accent)]" : "text-[var(--text-dim)]"
                     }`}
                   >
                     {p.num}
                   </span>
 
-                  {/* Title + role */}
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
                     <h3
-                      className={`text-[clamp(0.95rem,1.8vw,1.25rem)] font-bold tracking-[-0.01em] mb-1 transition-colors duration-300 ${
-                        isHov
-                          ? "text-[var(--text)]"
-                          : "text-[var(--text-muted)]"
+                      className={`text-[clamp(0.9rem,2.5vw,1.25rem)] font-bold tracking-[-0.01em] mb-1 transition-colors duration-300 ${
+                        isHov ? "text-[var(--text)]" : "text-[var(--text-muted)]"
                       }`}
                     >
                       {p.title}
                     </h3>
-                    <p className="text-[0.75rem] text-[var(--text-dim)] font-medium">
+                    <p className="text-[0.72rem] text-[var(--text-dim)] font-medium mb-2">
                       {p.role}
                     </p>
+
+                    <div className="flex gap-[0.35rem] flex-wrap sm:hidden">
+                      {p.stack.map((s) => (
+                        <span
+                          key={s}
+                          className="px-[0.55rem] py-[0.18rem] rounded-full text-[0.65rem] font-medium border bg-transparent border-[var(--border)] text-[var(--text-dim)]"
+                        >
+                          {s}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
-                  {/* Tech icons */}
-                  <div className="flex gap-[0.45rem] items-center flex-wrap">
+                  <div className="hidden sm:flex gap-[0.45rem] items-center flex-wrap">
                     {p.techIcons.map((icon) => (
                       <img
                         key={icon}
                         src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${icon}/${icon}-original.svg`}
                         alt={icon}
                         className={`w-5 h-5 object-contain transition-all duration-300 ${
-                          isHov
-                            ? "opacity-90"
-                            : "opacity-25 brightness-0 invert"
+                          isHov ? "opacity-90" : "opacity-25 brightness-0 invert"
                         }`}
-                        onError={(e) => {
-                          e.target.style.display = "none";
-                        }}
+                        onError={(e) => { e.target.style.display = "none"; }}
                       />
                     ))}
                   </div>
 
-                  <div className="flex gap-[0.35rem] flex-wrap max-w-[180px]">
+                  <div className="hidden sm:flex gap-[0.35rem] flex-wrap max-w-[180px]">
                     {p.stack.map((s) => (
                       <span
                         key={s}
@@ -122,7 +134,7 @@ export default function Projects() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className={`w-[34px] h-[34px] rounded-full border flex items-center justify-center text-[0.95rem] flex-shrink-0 transition-all duration-300 ${
+                    className={`w-[34px] h-[34px] rounded-full border flex items-center justify-center text-[0.95rem] flex-shrink-0 transition-all duration-300 self-center ${
                       isHov
                         ? "border-[var(--accent)] text-[var(--accent)] rotate-45"
                         : "border-[var(--border)] text-[var(--text-dim)] rotate-0"
