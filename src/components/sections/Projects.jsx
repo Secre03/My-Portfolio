@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { ScrollReveal } from "../ui/ScrollReveal.jsx";
 import { PROJECTS } from "../../data/portfolio";
 import BlurText from "../ui/BlurText.jsx";
@@ -134,13 +135,18 @@ export default function Projects() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={(e) => e.stopPropagation()}
-                    className={`w-[34px] h-[34px] rounded-full border flex items-center justify-center text-[0.95rem] flex-shrink-0 transition-all duration-300 self-center ${
+                    className={`w-[34px] h-[34px] rounded-full border flex items-center justify-center flex-shrink-0 transition-all duration-300 self-center ${
                       isHov
-                        ? "border-[var(--accent)] text-[var(--accent)] rotate-45"
-                        : "border-[var(--border)] text-[var(--text-dim)] rotate-0"
+                        ? "border-[var(--accent)] text-[var(--accent)]"
+                        : "border-[var(--border)] text-[var(--text-dim)]"
                     }`}
                   >
-                    ↗
+                    <ArrowUpRight
+                      size={16}
+                      className={`transition-transform duration-300 ${
+                        isHov ? "scale-110" : "scale-100"
+                      }`}
+                    />
                   </a>
                 </div>
               </ScrollReveal>

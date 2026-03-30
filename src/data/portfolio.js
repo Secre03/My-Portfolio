@@ -2,7 +2,7 @@ import { Layers, Monitor, Server, Database, Wrench } from "lucide-react";
 
 export const SOCIAL_LINKS = [
   { label: "GitHub", href: "https://github.com/Secre03" },
-  { label: "Gmail", href: "mailto:markmilano112@gmail.com" },
+  { label: "Gmail", href: "https://mail.google.com/mail/?view=cm&to=markmilano112@gmail.com" },
 ];
 
 export const WHATIDO = [
@@ -57,8 +57,8 @@ export const PROJECTS = [
     role: "GUI Application",
     stack: ["Python"],
     techIcons: ["python"],
-    img: "https://lauv-portfolio.vercel.app/_next/image?url=%2Fproj%2FprojectTwo.png&w=1080&q=75",
-    href: "#",
+    img: "/assets/projects/Pathfinder.png",
+    href: "https://github.com/Secre03/Pathfinder",
   },
   {
     num: "02",

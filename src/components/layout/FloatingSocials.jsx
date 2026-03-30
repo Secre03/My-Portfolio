@@ -1,4 +1,3 @@
-// src/components/layout/FloatingSocials.jsx
 import { useState, useEffect } from "react";
 import { SOCIAL_LINKS } from "../../data/portfolio";
 
