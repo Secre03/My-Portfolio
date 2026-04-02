@@ -151,7 +151,7 @@ export default function ChatBot() {
                 className="text-[0.65rem]"
                 style={{ color: "var(--text-muted)" }}
               >
-                IT Student · Always Learning
+                IT Student
               </span>
             </div>
           </div>
