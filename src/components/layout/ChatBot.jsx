@@ -1,11 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { useTheme } from "../../context/ThemeProvider.jsx";
+import { X, MessageCircle } from "lucide-react";
 
 const SUGGESTIONS = [
-  "What projects has Mark built?",
-  "What are his skills?",
-  "How can I contact Mark?",
-  "What are his hobbies?",
+  "What projects have you built?",
+  "What are you currently learning?",
+  "What's your tech stack?",
+  "How can I reach you?",
+  "Hobbies?",
 ];
 
 export default function ChatBot() {
@@ -14,7 +16,7 @@ export default function ChatBot() {
     {
       role: "assistant",
       content:
-        "Hi! I'm Mark's portfolio assistant. Ask me anything about his work, skills, or projects. 👋",
+        "Hi! I'm Mark 👋 I'm an IT student still learning and building stuff. Ask me anything about my projects or skills!",
     },
   ]);
   const [input, setInput] = useState("");
@@ -67,76 +69,89 @@ export default function ChatBot() {
 
   return (
     <>
-      <button
-        onClick={() => setOpen((o) => !o)}
-        aria-label="Toggle chat"
-        className="fixed bottom-6 right-6 z-[200] w-13 h-13 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110 active:scale-95"
-        style={{
-          width: "52px",
-          height: "52px",
-          background: open ? "rgba(20,218,60,0.15)" : "#14da3c",
-          border: open ? "1px solid #14da3c" : "none",
-          color: open ? "#14da3c" : "#000",
-          boxShadow: "0 8px 32px rgba(20,218,60,0.35)",
-        }}
+      <div
+        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[200] flex items-center gap-2 ${
+          !open ? "group" : ""
+        }`}
       >
-        {open ? (
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2.5}
-            className="w-5 h-5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        ) : (
-          <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2.05 21.95l4.782-1.388A9.953 9.953 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" />
-          </svg>
-        )}
-      </button>
+        <span
+          className="hidden sm:inline text-[0.72rem] font-semibold px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-slide-down transition-opacity duration-200 pointer-events-none whitespace-nowrap"
+          style={{
+            background: "var(--bg3)",
+            color: "var(--accent)",
+            border: "1px solid var(--border)",
+          }}
+        >
+          Chat with me
+        </span>
 
-      {/* chat panel */}
+        <button
+          onClick={() => setOpen((o) => !o)}
+          aria-label="Toggle chat"
+          className="rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 flex-shrink-0"
+          style={{
+            width: "52px",
+            height: "52px",
+            background: open ? "var(--bg3)" : "var(--accent)",
+            border: "2px solid var(--accent)",
+            color: open ? "var(--accent)" : "#000",
+            boxShadow: "0 8px 32px var(--accent-glow)",
+          }}
+        >
+          {open ? (
+            <X size={20} strokeWidth={2.5} />
+          ) : (
+            <MessageCircle size={22} strokeWidth={2} fill="currentColor" />
+          )}
+        </button>
+      </div>
+
       <div
         className="fixed z-[199] flex flex-col overflow-hidden transition-all duration-300"
         style={{
           bottom: "76px",
-          right: "1.5rem",
-          width: "340px",
-          height: open ? "480px" : "0px",
+          right: "1rem",
+          width: "calc(100vw - 2rem)",
+          maxWidth: "340px",
+          height: open ? "460px" : "0px",
           opacity: open ? 1 : 0,
           pointerEvents: open ? "auto" : "none",
           background: "var(--card)",
           border: "1px solid var(--border)",
           borderRadius: "1.25rem",
           boxShadow: isDark
-            ? "0 32px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(20,218,60,0.08)"
-            : "0 32px 80px rgba(0,0,0,0.12), 0 0 0 1px rgba(20,218,60,0.12)",
+            ? "0 32px 80px rgba(0,0,0,0.8), 0 0 0 1px var(--accent-glow)"
+            : "0 32px 80px rgba(0,0,0,0.12), 0 0 0 1px var(--accent-glow)",
+          animation: open ? "fadeUp 0.3s ease both" : "none",
         }}
       >
         <div
           className="flex items-center gap-3 px-4 py-3 flex-shrink-0"
           style={{ borderBottom: "1px solid var(--border)" }}
         >
-          <div
-            className="w-8 h-8 rounded-full flex items-center justify-center text-black font-black text-xs flex-shrink-0"
-            style={{ background: "#14da3c" }}
-          >
-            M
-          </div>
-          <div>
-            <p className="text-[var(--text)] text-[0.8rem] font-bold leading-none mb-0.5">
-              Mark's Assistant
+          <img
+            src="/profile.png"
+            alt="Mark Milano"
+            className="w-8 h-8 rounded-full flex-shrink-0 object-cover object-top"
+            style={{ border: "2px solid var(--accent)" }}
+          />
+          <div className="flex-1">
+            <p
+              className="text-[0.8rem] font-bold leading-none mb-0.5"
+              style={{ color: "var(--text)" }}
+            >
+              Mark Milano
             </p>
             <div className="flex items-center gap-1.5">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#14da3c]" />
-              <span className="text-[0.65rem] text-[var(--text-muted)]">
-                Online
+              <div
+                className="w-1.5 h-1.5 rounded-full"
+                style={{ background: "var(--accent)" }}
+              />
+              <span
+                className="text-[0.65rem]"
+                style={{ color: "var(--text-muted)" }}
+              >
+                IT Student · Always Learning
               </span>
             </div>
           </div>
@@ -146,14 +161,25 @@ export default function ChatBot() {
           {messages.map((m, i) => (
             <div
               key={i}
-              className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
+              className={`animate-fade-up flex gap-2 ${
+                m.role === "user" ? "justify-end" : "justify-start items-end"
+              }`}
             >
+              {m.role === "assistant" && (
+                <img
+                  src="/profile.png"
+                  alt="Mark"
+                  className="w-6 h-6 rounded-full object-cover object-top flex-shrink-0 mb-0.5"
+                  style={{ border: "1px solid var(--accent)" }}
+                />
+              )}
+
               <div
-                className="max-w-[80%] px-3 py-2 rounded-2xl text-[0.78rem] leading-[1.6]"
+                className="max-w-[75%] px-3 py-2 rounded-2xl text-[0.78rem] leading-[1.6]"
                 style={
                   m.role === "user"
                     ? {
-                        background: "#14da3c",
+                        background: "var(--accent)",
                         color: "#000",
                         fontWeight: 600,
                         borderBottomRightRadius: "4px",
@@ -171,7 +197,13 @@ export default function ChatBot() {
           ))}
 
           {loading && (
-            <div className="flex justify-start">
+            <div className="animate-fade-in flex gap-2 justify-start items-end">
+              <img
+                src="/profile.png"
+                alt="Mark"
+                className="w-6 h-6 rounded-full object-cover object-top flex-shrink-0 mb-0.5"
+                style={{ border: "1px solid var(--accent)" }}
+              />
               <div
                 className="px-4 py-3 rounded-2xl flex gap-1 items-center"
                 style={{
@@ -194,17 +226,12 @@ export default function ChatBot() {
           )}
 
           {messages.length === 1 && !loading && (
-            <div className="flex flex-col gap-1.5 mt-1">
+            <div className="animate-fade-up flex flex-col gap-1.5 mt-1">
               {SUGGESTIONS.map((s) => (
                 <button
                   key={s}
                   onClick={() => send(s)}
-                  className="text-left px-3 py-2 rounded-xl text-[0.72rem] font-medium transition-all duration-150 hover:-translate-y-0.5"
-                  style={{
-                    background: "rgba(20,218,60,0.06)",
-                    border: "1px solid rgba(20,218,60,0.18)",
-                    color: "rgba(20,218,60,0.85)",
-                  }}
+                  className="text-left px-3 py-2 rounded-xl text-[0.72rem] font-medium transition-all duration-150 hover:-translate-y-0.5 badge-accent"
                 >
                   {s}
                 </button>
@@ -231,18 +258,16 @@ export default function ChatBot() {
               background: "var(--bg2)",
               color: "var(--text)",
               border: "1px solid var(--border)",
-              caretColor: "#14da3c",
+              caretColor: "var(--accent)",
             }}
-            onFocus={(e) =>
-              (e.target.style.borderColor = "rgba(20,218,60,0.35)")
-            }
+            onFocus={(e) => (e.target.style.borderColor = "var(--accent)")}
             onBlur={(e) => (e.target.style.borderColor = "var(--border)")}
           />
           <button
             onClick={() => send()}
             disabled={!input.trim() || loading}
             className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-150 disabled:opacity-30 hover:scale-105 active:scale-95"
-            style={{ background: "#14da3c", color: "#000" }}
+            style={{ background: "var(--accent)", color: "#000" }}
           >
             <svg
               viewBox="0 0 24 24"
