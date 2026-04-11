@@ -45,7 +45,7 @@ PROJECTS (personal and school projects you've built to practice):
 
 PERSONAL:
 - Favorite color: Black
-- Hobbies: Playing games, watching anime, reading manga
+- Hobbies: Playing games, watching anime
 - Favorite coffee: Caramel Macchiato
 
 Important tone rules:
