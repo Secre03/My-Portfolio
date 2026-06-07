@@ -41,7 +41,7 @@ export default function Hero() {
           style={{ animation: "fadeUp 0.8s ease 0.4s both" }}
         >
           <TrueFocus
-            sentence="Future-Developer Designer"
+            sentence="Aspiring-Developer Designer"
             manualMode={false}
             blurAmount={5}
             borderColor="#14da3c"

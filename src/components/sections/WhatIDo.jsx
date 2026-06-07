@@ -28,7 +28,7 @@ export default function WhatIDo() {
           {WHATIDO.map(({ label, desc }, i) => (
             <ScrollReveal key={label} delay={i * 100}>
               <div className="relative overflow-hidden bg-[var(--card)] border border-[var(--border)] rounded-2xl p-6 sm:p-8 md:p-9 h-full">
-                <div className="absolute top-0 left-0 w-[3px] h-12 bg-[var(--accent)] rounded-br" />
+                {/* <div className="absolute top-0 left-0 w-[3px] h-12 bg-[var(--accent)] rounded-br" /> */}
                 <h3 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] font-black tracking-tight text-[var(--text)] mb-3 sm:mb-4">
                   {label}
                 </h3>
